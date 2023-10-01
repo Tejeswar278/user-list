@@ -71,3 +71,7 @@ table.tablelayout {
 .display {
     display: none;
 }
+
+.borderblue{
+    border: 2px solid blue;
+}

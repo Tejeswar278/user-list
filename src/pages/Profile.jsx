@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link ,useLocation} from 'react-router-dom'
 import "./Profile.css"
 import List from '../components/List';
+import {FaAngleDown,FaAngleUp} from "react-icons/fa"
+import {GrChat} from "react-icons/gr"
 
 export default function Profile() {
 const location = useLocation()
@@ -13,6 +15,8 @@ console.log(data,"prop data in profile page")
 const [togglestate, setToggleState] = useState(1)
 const [heading, setHeading] = useState("Profile")
 const [show, setshow] = useState(false)
+const [chatshow, setChatShow] = useState(false)
+const [chat, setChat] = useState(false)
 
 const toggletab = (index) => {
   if(index === 1){
@@ -161,6 +165,32 @@ let location_ = {
                             <div className='flex justify-end'>
                             <span className='text-slate-400 me-1'>Lat:</span>{location_.lat}<span className='text-slate-400 ms-3 me-1'>Long:</span>{location_.lng}
                             </div>
+                    </div>
+                    <div className='bottom-0 flex justify-end'>
+                        <div className="rounded-t-xl fixed bottom-0 overflow-y-scroll max-h-80 bg-white w-60 scrollbar border2">
+                            <div onClick={()=> {
+                                    setChatShow(!chatshow)
+                                }} className='border1 w-full sticky top-0 text-white bg-blue-600 p-5 flex items-center justify-between'>
+                                <div className='flex items-center'><GrChat/><span className='ms-2'>Chats</span></div>
+                                <div>{chatshow === true?<FaAngleDown/> : <FaAngleUp/>}</div>
+                            </div>
+                        <div className={chatshow === true?"block":"hidden"}>
+                        {
+                        dataList.map((ele) => {
+                            return (
+                                <div className='flex flex-row px-5' onClick={() => {
+                                    setChat(true)
+                                }}>
+                                    <img className='w-8 rounded-full me-2' src={ele.profilepicture} alt={ele.name}/>
+                                    <div>
+                                        {ele.name}
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
