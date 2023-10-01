@@ -75,3 +75,7 @@ table.tablelayout {
 .borderblue{
     border: 2px solid blue;
 }
+
+.maxH {
+    max-height: 284px;
+}

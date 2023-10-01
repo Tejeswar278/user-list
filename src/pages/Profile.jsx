@@ -44,6 +44,9 @@ let location_ = {
         if(show === true){
             setshow(false)
         }
+        if(chatshow === true){
+            setChatShow(false)
+        }
     }}>
         {/* <div>click <Link to="/"><span className='hover:underline text-blue-500'>here</span></Link> to go to home page</div> */}
 

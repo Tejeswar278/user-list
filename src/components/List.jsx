@@ -6,7 +6,7 @@ import "./List.css"
 export default function List({data}) {
     console.log(data,"data inside link component")
   return (
-    <div className='overflow-y-scroll h-auto max-h-96 overscroll-auto rounded-br-3xl scrollbar mr-2 ms-6'>
+    <div className='overflow-y-scroll h-auto overscroll-auto rounded-br-3xl scrollbar mr-2 ms-6 maxH'>
             {data.map((object,i) => {
               return (
                 <div className='flex border-solid  border-slate-300 py-3 border-b-2 w-11/12' key={i} onClick={() => goToDetails()}>

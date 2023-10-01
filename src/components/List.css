@@ -1,3 +1,7 @@
 /* .overflowX {
     overflow-x: hidden;
 } */
+
+.maxH {
+    max-height: 384px;
+}
