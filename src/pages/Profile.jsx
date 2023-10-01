@@ -5,8 +5,9 @@ import List from '../components/List';
 
 export default function Profile() {
 const location = useLocation()
-const data = location.state;
-const datalist = location.state1
+const wholeData = location.state;
+const data = wholeData.singleObj;
+const dataList = wholeData.wholeOjb
 console.log(data,"prop data in profile page")
 
 const [togglestate, setToggleState] = useState(1)
@@ -26,8 +27,7 @@ const toggletab = (index) => {
   setToggleState(index)
 }
 
-// let url = `https://maps.google.com/maps?q=${data.address.geo.lat},${data.address.geo.lng}&hl=es;&output=embed&zoom=9`;
-let url = `https://maps.google.com/maps?q=17.385044,78.486671&hl=es;&output=embed&zoom=9`;
+let url = `https://maps.google.com/maps?q=${data.address.geo.lat},${data.address.geo.lng}&hl=es;&output=embed&zoom=9`;
 
 let location_ = {
     address: `${data.address.street},${data.address.suite},${data.address.city},${data.address.zipcode}`,
@@ -36,7 +36,11 @@ let location_ = {
   }
 
   return (
-    <div className='container'>
+    <div className='container' onClick={() => {
+        if(show === true){
+            setshow(false)
+        }
+    }}>
         {/* <div>click <Link to="/"><span className='hover:underline text-blue-500'>here</span></Link> to go to home page</div> */}
 
         <div className='tabs'>
@@ -67,8 +71,8 @@ let location_ = {
                         <div className='text-slate-400 text-md'>
                             {data.email}
                         </div>
-                        <div className='mb-5'>List</div>
-                        <div className='mb-5 text-white font-medium'>
+                        <div className='mb-5 w-full'>< List data={dataList}/></div>
+                        <div className='mb-5 text-white font-medium overflowX'>
                             <Link className='bg-red-600 rounded-full py-2 mb-5 px-6' to="/">Sign-out</Link>
                         </div>
                     </div>
