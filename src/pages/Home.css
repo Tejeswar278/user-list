@@ -1,0 +1,25 @@
+.scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: white;
+    border-bottom-right-radius: 24px;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+    background: rgb(186, 179, 179);
+    border-radius: 10px;
+    margin-right: 10px;
+    padding-right: 20px;
+}
+
+.nameborder {
+    /* border: 1px solid red; */
+    width: 400px;
+}
+
+.border1 {
+    border: 1px solid black;
+}

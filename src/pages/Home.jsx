@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import "./Home.css"
+import List from '../components/List';
 
 export default function Home() {
   let url = "https://panorbit.in/api/users.json"
@@ -17,18 +19,9 @@ export default function Home() {
   };
   return (
     <div>
-        <div>click <Link to="/profile"><span className='hover:underline text-blue-500'>here</span></Link> to go to profile page</div>
-        <div>
-          {data.map((object,i) => {
-            return (
-              <div className='flex' key={i} onClick={() => goToDetails()}>
-                <Link to="/profile" state={object}>
-                <img className='w-5 h-5 rounded-xl' src={object.profilepicture} key={i}/> 
-                <p>{object.name}</p>
-                </Link>
-              </div>
-            )
-          })}
+        <div className='border-solid border-2 w-2/5 m-auto mt-28 object-scale-down rounded-3xl pb-2 shadow-2xl'>
+          <div className='font-semibold text-xl text-center p-10 bg-slate-100 text-slate-600 rounded-t-3xl'>Select an account</div>
+          <List data={data}/>
         </div>
     </div>
   )
