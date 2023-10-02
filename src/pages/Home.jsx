@@ -16,8 +16,8 @@ export default function Home() {
   },[])
 
   return (
-    <div>
-        <div className='border-solid border-2 w-2/5 m-auto mt-28 object-scale-down rounded-3xl pb-2 shadow-2xl'>
+    <div className='absolute w-full h-full'>
+        <div className=' h-3/5 border-solid border-2 w-2/5 m-auto mt-28 object-scale-down rounded-3xl pb-2 shadow-2xl'>
           <div className='font-semibold text-xl text-center p-10 bg-slate-100 text-slate-600 rounded-t-3xl'>Select an account</div>
           <List data={data}/>
         </div>

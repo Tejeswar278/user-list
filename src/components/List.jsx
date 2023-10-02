@@ -4,7 +4,6 @@ import "../pages/Home.css"
 import "./List.css"
 
 export default function List({data}) {
-    console.log(data,"data inside link component")
   return (
     <div className='overflow-y-scroll h-auto overscroll-auto rounded-br-3xl scrollbar mr-2 ms-6 maxH'>
             {data.map((object,i) => {

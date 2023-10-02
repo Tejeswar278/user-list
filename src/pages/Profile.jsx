@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Profile.css";
 import List from "../components/List";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { GrChat } from "react-icons/gr";
+import {BsChatRight} from "react-icons/bs"
+import {IoMdClose} from "react-icons/io"
 import TableRow from "../components/TableRow";
+import Chat from "../components/Chat";
 
 export default function Profile() {
+	useEffect(() => {
+		const chatSelected = new Map()
+	},[])
 	const location = useLocation();
 	const wholeData = location.state;
 	const data = wholeData.singleObj;
@@ -17,6 +22,41 @@ export default function Profile() {
 	const [show, setshow] = useState(false);
 	const [chatshow, setChatShow] = useState(false);
 	const [chat, setChat] = useState(false);
+	const [name, setName] = useState("")
+	const [chatList, setChatList] = useState([])
+
+	const [array, setArray] = useState([]);
+	const [newItemGen, setNewItemGen] = useState(0);
+  
+	const addItem = (item) => {
+		console.log(item,"printing item")
+	  if (chatList.includes(item)) {
+		console.log("check1")
+		setChatList((prevState) =>
+		  prevState.filter((existing) => existing !== item)
+		);
+	  } else {
+		console.log("check2")
+		setChatList((prevState) => [item, ...prevState.slice(0, 2)]);
+	  }
+	};
+
+	const removeItem = (item) => {
+		console.log(item,"printing removable item")
+	  if (chatList.includes(item)) {
+		console.log("remove check1")
+		setChatList((prevState) =>
+		  prevState.filter((existing) => existing !== item)
+		);
+	  } else {
+		console.log("remove check 2")
+		setChatList((prevState) => [item, ...prevState.slice(0, 2)]);
+	  }
+	};
+
+
+	// const [picture, setPicture] = useState("")
+	console.log(chatList,"chat list after click")
 
 	const toggletab = (index) => {
 		if (index === 1) {
@@ -40,6 +80,7 @@ export default function Profile() {
 	};
 
 	const tabs = ["Profile","Post","Gallery","ToDo"]
+	const chats = []
 
 	return (
 		<div
@@ -48,9 +89,9 @@ export default function Profile() {
 				if (show === true) {
 					setshow(false);
 				}
-				if (chatshow === true) {
-					setChatShow(false);
-				}
+				// if (chatshow === true) {
+				// 	setChatShow(false);
+				// }
 			}}
 		>
 			<div className="tabs">
@@ -147,7 +188,7 @@ export default function Profile() {
 								</table>
 							</div>
 						</div>
-						<div className="border-s border-slate-400 w-full mt-10 ps-10">
+						<div className="border-s border-slate-400 w-full mt-10 ps-10 bottom-0">
 							<table>
 								<tbody>
 									<tr>
@@ -171,15 +212,15 @@ export default function Profile() {
 								</div>
 							</div>
 							<div className="bottom-0 flex justify-end">
-								<div className="rounded-t-xl fixed bottom-0 bg-white w-60  border2">
-									<div
+								<div className="rounded-t-2xl fixed bottom-0 bg-white w-60 border3">
+									<div 
 										onClick={() => {
 											setChatShow(!chatshow);
 										}}
-										className="border1 w-full sticky top-0 text-white bg-blue-600 p-5 flex items-center justify-between"
+										className="w-full sticky top-0 text-white bg-blue-600 p-5 flex items-center justify-between rounded-t-2xl"
 									>
 										<div className="flex items-center text-white">
-											<GrChat style={iconstyle} />
+											<BsChatRight style={iconstyle} />
 											<span className="ms-2">Chats</span>
 										</div>
 										<div>
@@ -189,29 +230,43 @@ export default function Profile() {
 									<div
 										className={
 											chatshow === true
-												? "block overflow-y-scroll scrollbar max-h-80"
+												? "block overflow-y-scroll scrollbar max-h-80 me-2"
 												: "hidden"
 										}
+										onClick={()=>{setChatShow(true)}}
 									>
 										{dataList.map((ele,i) => {
 											return (
-												<div
-													className="flex flex-row px-5"
-													onClick={() => {
-														setChat(true);
-													}}
-													key={i}
-												>
-													<img
-														className="w-8 rounded-full me-2"
-														src={ele.profilepicture}
-														alt={ele.name}
-													/>
-													<div>{ele.name}</div>
+												<div key={i} className="flex justify-between pe-2 items-center my-2 hover:cursor-pointer">
+													<div
+														className="flex flex-row px-5 items-center"
+														onClick={() => {
+															addItem(ele)
+																setChatShow(true);
+																setName(ele.name);
+														}}
+														key={i}
+
+													>
+														<img
+															className="w-8 rounded-full me-2"
+															src={ele.profilepicture}
+															alt={ele.name}
+														/>
+														<div className="text-xs">{ele.name}</div>
+													</div>
+													<div className="w-2 h-2 rounded-full bg-green-600"></div>
 												</div>
 											);
 										})}
 									</div>
+								</div>
+								<div className={chatList.length === 0?"hidden":"fixed bottom-0 right-80 w-auto flex flex-row-reverse overflow-hidden overscroll-x-auto"}>
+									{chatList.map((ele,i) => {
+										return (
+											<Chat element={ele} removeItem={removeItem} key={i} />
+										)
+									})}
 								</div>
 							</div>
 						</div>

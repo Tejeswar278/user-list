@@ -79,3 +79,11 @@ table.tablelayout {
 .maxH {
     max-height: 284px;
 }
+
+.border3 {
+    border: 1px solid blue;
+}
+
+.border4 {
+    border: 1px solid red;
+}
