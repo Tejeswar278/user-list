@@ -14,9 +14,7 @@ export default function Home() {
   useEffect(() => {
     fetchData()
   },[])
-  const goToDetails = () => {
-    this.props.router.push('/profile');
-  };
+
   return (
     <div>
         <div className='border-solid border-2 w-2/5 m-auto mt-28 object-scale-down rounded-3xl pb-2 shadow-2xl'>

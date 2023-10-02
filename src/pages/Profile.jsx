@@ -4,6 +4,7 @@ import "./Profile.css";
 import List from "../components/List";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { GrChat } from "react-icons/gr";
+import TableRow from "../components/TableRow";
 
 export default function Profile() {
 	const location = useLocation();
@@ -11,8 +12,6 @@ export default function Profile() {
 	const data = wholeData.singleObj;
 	const dataList = wholeData.wholeOjb;
 	const iconstyle = { color: "white" };
-	console.log(data, "prop data in profile page");
-
 	const [togglestate, setToggleState] = useState(1);
 	const [heading, setHeading] = useState("Profile");
 	const [show, setshow] = useState(false);
@@ -40,6 +39,8 @@ export default function Profile() {
 		lng: data.address.geo.lng,
 	};
 
+	const tabs = ["Profile","Post","Gallery","ToDo"]
+
 	return (
 		<div
 			className="container"
@@ -52,33 +53,18 @@ export default function Profile() {
 				}
 			}}
 		>
-			{/* <div>click <Link to="/"><span className='hover:underline text-blue-500'>here</span></Link> to go to home page</div> */}
-
 			<div className="tabs">
-				<div
-					className={togglestate === 1 ? "active" : ""}
-					onClick={() => toggletab(1)}
-				>
-					Profile
-				</div>
-				<div
-					className={togglestate === 2 ? "active" : ""}
-					onClick={() => toggletab(2)}
-				>
-					Post
-				</div>
-				<div
-					className={togglestate === 3 ? "active" : ""}
-					onClick={() => toggletab(3)}
-				>
-					Gallary
-				</div>
-				<div
-					className={togglestate === 4 ? "active" : ""}
-					onClick={() => toggletab(4)}
-				>
-					ToDo
-				</div>
+				{tabs.map((tab,i) => {
+					return (
+						<div
+							className={togglestate === i+1 ? "active" : ""}
+							onClick={() => toggletab(i+1)}
+							key={i}
+						>
+							{tab}
+						</div>
+					)
+				})}
 			</div>
 			<div className="tab-content">
 				<header className="border-slate-400 h-16">
@@ -145,74 +131,18 @@ export default function Profile() {
 							<div className="grid-table">
 								<table className="m-auto">
 									<tbody className="space-y-10">
-										<tr>
-											<td className="flex justify-end text-slate-400 pe-3 text-xl">
-												Username
-											</td>
-											<td className="text-slate-400 text-xl">:</td>
-											<td className="text-xl ps-3 font-medium text-slate-600">
-												{data.username}
-											</td>
-										</tr>
-										<tr>
-											<td className="flex justify-end text-slate-400 pe-3 text-xl">
-												e-mail
-											</td>
-											<td className="text-slate-400 text-xl">:</td>
-											<td className="text-xl ps-3 font-medium text-slate-600">
-												{data.email}
-											</td>
-										</tr>
-										<tr>
-											<td className="flex justify-end text-slate-400 pe-3 text-xl">
-												phone
-											</td>
-											<td className="text-slate-400 text-xl">:</td>
-											<td className="text-xl ps-3 font-medium text-slate-600">
-												{data.phone}
-											</td>
-										</tr>
-										<tr>
-											<td className="flex justify-end text-slate-400 pe-3 text-xl">
-												Website
-											</td>
-											<td className="text-slate-400 text-xl">:</td>
-											<td className="text-xl ps-3 font-medium text-slate-600">
-												{data.website}
-											</td>
-										</tr>
+										<TableRow type="Username" value={data.username}/>
+										<TableRow type="e-mail" value={data.email}/>
+										<TableRow type="phone" value={data.phone}/>
+										<TableRow type="Website" value={data.website}/>
 										<tr className="text-center border-t">
 											<td colSpan={3} className=" text-slate-400 text-xl">
 												Company
 											</td>
 										</tr>
-										<tr>
-											<td className="flex justify-end text-slate-400 pe-3 text-xl">
-												Name
-											</td>
-											<td className="text-slate-400 text-xl">:</td>
-											<td className="text-xl ps-3 font-medium text-slate-600">
-												{data.company.name}
-											</td>
-										</tr>
-										<tr>
-											<td className="flex justify-end text-slate-400 pe-3 text-xl">
-												catchphrase
-											</td>
-											<td className="text-slate-400 text-xl">:</td>
-											<td className="text-xl ps-3 font-medium text-slate-600">
-												{data.company.catchPhrase}
-											</td>
-										</tr>
-										<tr>
-											<td className="flex justify-end text-slate-400 pe-3 text-xl">
-												bs
-											</td>
-											<td className="text-slate-400 text-xl">:</td>
-											<td className="text-xl ps-3 font-medium text-slate-600">
-												{data.company.bs}
-											</td>
-										</tr>
+										<TableRow type="Name" value={data.company.name}/>
+										<TableRow type="catchphrase" value={data.company.catchPhrase}/>
+										<TableRow type="bs" value={data.company.bs}/>
 									</tbody>
 								</table>
 							</div>
@@ -221,47 +151,14 @@ export default function Profile() {
 							<table>
 								<tbody>
 									<tr>
-										{" "}
 										<th className="text-slate-400 text-2xl font-normal mb-5">
 											Address :
 										</th>
 									</tr>
-									<tr>
-										<td className="flex justify-end text-slate-400 pe-3 text-xl">
-											Street
-										</td>
-										<td className="text-slate-400 text-xl">:</td>
-										<td className="text-xl ps-3 font-medium text-slate-600">
-											{data.address.street}
-										</td>
-									</tr>
-									<tr>
-										<td className="flex justify-end text-slate-400 pe-3 text-xl">
-											Suite
-										</td>
-										<td className="text-slate-400 text-xl">:</td>
-										<td className="text-xl ps-3 font-medium text-slate-600">
-											{data.address.suite}
-										</td>
-									</tr>
-									<tr>
-										<td className="flex justify-end text-slate-400 pe-3 text-xl">
-											City
-										</td>
-										<td className="text-slate-400 text-xl">:</td>
-										<td className="text-xl ps-3 font-medium text-slate-600">
-											{data.address.city}
-										</td>
-									</tr>
-									<tr>
-										<td className="flex justify-end text-slate-400 pe-3 text-xl">
-											Zipcode
-										</td>
-										<td className="text-slate-400 text-xl">:</td>
-										<td className="text-xl ps-3 font-medium text-slate-600">
-											{data.address.zipcode}
-										</td>
-									</tr>
+									<TableRow type="Street" value={data.address.street}/>
+									<TableRow type="Suite" value={data.address.suite}/>
+									<TableRow type="City" value={data.address.city}/>
+									<TableRow type="Zipcode" value={data.address.zipcode}/>
 								</tbody>
 							</table>
 							<div className="w-full mt-5">
@@ -296,13 +193,14 @@ export default function Profile() {
 												: "hidden"
 										}
 									>
-										{dataList.map((ele) => {
+										{dataList.map((ele,i) => {
 											return (
 												<div
 													className="flex flex-row px-5"
 													onClick={() => {
 														setChat(true);
 													}}
+													key={i}
 												>
 													<img
 														className="w-8 rounded-full me-2"
