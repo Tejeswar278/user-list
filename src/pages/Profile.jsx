@@ -24,36 +24,30 @@ export default function Profile() {
 	const [chat, setChat] = useState(false);
 	const [name, setName] = useState("")
 	const [chatList, setChatList] = useState([])
-
-	const [array, setArray] = useState([]);
-	const [newItemGen, setNewItemGen] = useState(0);
   
 	const addItem = (item) => {
-		console.log(item,"printing item")
+		console.log(item.id,": added")
 	  if (chatList.includes(item)) {
-		console.log("check1")
+		console.log("if cond in addItem")
 		setChatList((prevState) =>
 		  prevState.filter((existing) => existing !== item)
 		);
 	  } else {
-		console.log("check2")
+		console.log("else cond in addItem")
 		setChatList((prevState) => [item, ...prevState.slice(0, 2)]);
 	  }
 	};
 
 	const removeItem = (item) => {
 		console.log(item,"printing removable item")
-	  if (chatList.includes(item)) {
-		console.log("remove check1")
+		console.log(chatList,"list before deletion")
 		setChatList((prevState) =>
-		  prevState.filter((existing) => existing !== item)
+		{
+			return prevState.filter((existing) => existing !== item)
+		}
 		);
-	  } else {
-		console.log("remove check 2")
-		setChatList((prevState) => [item, ...prevState.slice(0, 2)]);
-	  }
+		console.log(chatList,"list after deletion")
 	};
-
 
 	// const [picture, setPicture] = useState("")
 	console.log(chatList,"chat list after click")
@@ -261,7 +255,7 @@ export default function Profile() {
 										})}
 									</div>
 								</div>
-								<div className={chatList.length === 0?"hidden":"fixed bottom-0 right-80 w-auto flex flex-row-reverse overflow-hidden overscroll-x-auto"}>
+								<div className={chatList.length === 0?"hidden":"fixed h-auto bottom-0 right-80 w-auto flex flex-row-reverse overflow-hidden overscroll-x-auto"}>
 									{chatList.map((ele,i) => {
 										return (
 											<Chat element={ele} removeItem={removeItem} key={i} />
