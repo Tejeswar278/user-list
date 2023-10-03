@@ -2,3 +2,7 @@
     border-right: 1px solid blue;
     border-left: 1px solid blue
 }
+
+.maxwidth {
+    max-width: 110px;
+}
